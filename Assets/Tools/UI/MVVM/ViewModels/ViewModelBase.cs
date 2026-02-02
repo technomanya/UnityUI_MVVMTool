@@ -14,10 +14,10 @@ namespace ViewModels
     
         public TModel Model => _model;
         public TView View => _view;
-    
+        
         public void Initialize(TModel model, TView view)
         {
-            if (_model != null) return; // Already initialized
+            if (_model != null) return; 
             if (_view) return;
             
             _model = model ?? throw new ArgumentNullException(nameof(model));
@@ -38,8 +38,11 @@ namespace ViewModels
         {
             UpdateView();
         }
-    
-        protected virtual void OnInitialized() { }
+
+        protected virtual void OnInitialized()
+        {
+            _view.OnCloseRequested += Hide;
+        }
         protected abstract void UpdateView();
     
         public virtual void Show() => View.viewElement.SetActive(true);
