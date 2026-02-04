@@ -17,8 +17,7 @@ namespace ViewModels
         
         public void Initialize(TModel model, TView view)
         {
-            if (_model != null) return; 
-            if (_view) return;
+            if (_model != null || _view != null) return;
             
             _model = model ?? throw new ArgumentNullException(nameof(model));
             _view = view ?? throw new ArgumentNullException(nameof(view));
@@ -30,8 +29,7 @@ namespace ViewModels
     
         protected virtual void SubscribeToModel()
         {
-            if (_model != null)
-                _model.PropertyChanged += OnModelPropertyChanged;
+            _model.PropertyChanged += OnModelPropertyChanged;
         }
     
         protected virtual void OnModelPropertyChanged(string propertyName)
@@ -44,14 +42,25 @@ namespace ViewModels
             _view.OnCloseRequested += Hide;
         }
         protected abstract void UpdateView();
-    
-        public virtual void Show() => View.viewElement.SetActive(true);
-        public virtual void Hide() => View.viewElement.SetActive(false);
+
+        public virtual void Show()
+        {
+            if (View?.viewElement)
+                    View.viewElement.SetActive(true);
+        }
+        public virtual void Hide()
+        {
+            if (View?.viewElement)
+                View.viewElement.SetActive(false);
+        }
     
         protected virtual void OnDestroy()
         {
             if (_model != null)
                 _model.PropertyChanged -= OnModelPropertyChanged;
+            
+            if(_view)
+                _view.OnCloseRequested -= Hide;
         }
     }
 }

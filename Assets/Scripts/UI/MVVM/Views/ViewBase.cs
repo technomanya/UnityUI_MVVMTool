@@ -15,7 +15,13 @@ namespace Views
 
         private void Start()
         {
-            closeButton.onClick.AddListener(RaiseCloseRequested);
+            if (closeButton)
+                closeButton.onClick.AddListener(RaiseCloseRequested);
+        }
+        private void OnDestroy()
+        {
+            if (closeButton)
+                closeButton.onClick.RemoveListener(RaiseCloseRequested);
         }
     }
 }
