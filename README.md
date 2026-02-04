@@ -1,4 +1,10 @@
-# UnityUI_MVVMTool
-Model-View-Viewmodel tool for Unity UI
+# Unity MVVM Tool
 
-Example User Panel is showing the code on work.
+## Best Practices
+- When to use MVVM vs simple MVC
+- Performance considerations
+- Testing strategies
+
+## Known Limitations
+- Not suitable for simple UIs
+- Requires understanding of reactive programming
