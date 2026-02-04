@@ -7,7 +7,6 @@ namespace Models
     public abstract class ModelBase
     {
         public event Action<string> PropertyChanged;
-        public UIDataSo uiData;
         
         protected void OnPropertyChanged(string propertyName = null)//This method can be overloaded to provide custom logic for property change notifications
         {

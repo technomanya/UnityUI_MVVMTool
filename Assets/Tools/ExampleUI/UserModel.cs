@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UserModel : ModelBase
 {
+    
+    public UIDataSo uiData;
     public UserModel(UIDataSo data)
     {
         uiData = data;
